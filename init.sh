@@ -65,25 +65,23 @@ sudo -u "$USERNAME" bash -c "
     sudo ./install-zsh.sh
 "
 
-# --- Configure GRUB to use terminal mode ---
-echo ">>> Configuring GRUB to use terminal (text-only) mode..."
+echo ">>> Configuring GRUB to use simple console mode..."
 
 # Remove conflicting lines
 sed -i '/GRUB_GFXMODE/d' /etc/default/grub
 sed -i '/GRUB_GFXPAYLOAD_LINUX/d' /etc/default/grub
 sed -i '/GRUB_TERMINAL/d' /etc/default/grub
 
-# Add new settings
+# Add only the console terminal setting
 cat <<EOF >> /etc/default/grub
 
-# Force GRUB into pure terminal mode
+# Simple, clean GRUB console mode
 GRUB_TERMINAL=console
-GRUB_GFXMODE=text
-GRUB_GFXPAYLOAD_LINUX=text
 EOF
 
 echo ">>> Updating GRUB..."
 update-grub
+
 
 echo ">>> Cleaning up..."
 apt autoremove -y
