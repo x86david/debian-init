@@ -71,15 +71,6 @@ chmod +x install-zsh.sh
 echo ">>> Running ZSH installer as root..."
 sudo ./install-zsh.sh
 
-# --- Restore clean GRUB (remove GNOME theme only) ---
-echo ">>> Removing GNOME GRUB theme to restore clean look..."
-
-# Remove ONLY the theme line added by GNOME
-sed -i '/GRUB_THEME/d' /etc/default/grub
-
-echo ">>> Updating GRUB..."
-update-grub
-
 echo ">>> Cleaning up..."
 apt autoremove -y
 apt clean
