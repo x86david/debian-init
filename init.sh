@@ -71,18 +71,11 @@ chmod +x install-zsh.sh
 echo ">>> Running ZSH installer as root..."
 sudo ./install-zsh.sh
 
-# --- Configure GRUB to use simple console mode ---
-echo ">>> Configuring GRUB to use simple console mode..."
+# --- Restore clean GRUB (remove GNOME theme only) ---
+echo ">>> Removing GNOME GRUB theme to restore clean look..."
 
-sed -i '/GRUB_GFXMODE/d' /etc/default/grub
-sed -i '/GRUB_GFXPAYLOAD_LINUX/d' /etc/default/grub
-sed -i '/GRUB_TERMINAL/d' /etc/default/grub
-
-cat <<EOF >> /etc/default/grub
-
-# Simple, clean GRUB console mode
-GRUB_TERMINAL=console
-EOF
+# Remove ONLY the theme line added by GNOME
+sed -i '/GRUB_THEME/d' /etc/default/grub
 
 echo ">>> Updating GRUB..."
 update-grub
