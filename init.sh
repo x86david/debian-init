@@ -58,7 +58,6 @@ fi
 # --- Install ZSH environment from GitHub ---
 echo ">>> Installing ZSH environment from GitHub..."
 
-sudo -u "$USERNAME" bash <<EOF
 cd /home/$USERNAME
 
 # Remove old clone if exists
@@ -69,13 +68,8 @@ cd install-zsh
 
 chmod +x install-zsh.sh
 
-echo "ℹ️  Only users who currently use /bin/bash will be switched to Zsh."
-
-# Patch installer to change shell ONLY for users with /bin/bash
-sed -i 's/for u in .*/for u in \$(awk -F: '\''\$7 == "\/bin\/bash" {print \$1}'\'' \/etc\/passwd); do/' install-zsh.sh
-
-./install-zsh.sh
-EOF
+echo ">>> Running ZSH installer as root..."
+sudo ./install-zsh.sh
 
 # --- Configure GRUB to use simple console mode ---
 echo ">>> Configuring GRUB to use simple console mode..."
