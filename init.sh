@@ -61,8 +61,8 @@ sudo -u "$USERNAME" bash -c "
     cd /home/$USERNAME
     git clone https://github.com/x86david/install-zsh
     cd install-zsh
-    chmod +x install.sh
-    ./install.sh
+    chmod +x install-zsh.sh
+    sudo ./install-zsh.sh
 "
 
 # --- Configure GRUB to use terminal mode ---
